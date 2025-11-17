@@ -20,107 +20,121 @@
   <button id="languageToggle">العربية</button>
 
   <!-- Welcome Screen -->
-  <section id="welcomeScreen" aria-label="Welcome Screen">
-    <img
-      id="universityLogo"
-      src="university_logo.png"
-      alt="University Logo"
-      class="logo-image"
-    />
+<section id="welcomeScreen" aria-label="Welcome Screen">
+  <div id="welcomeHero">
+    <!-- LEFT COLUMN: logo + text + names + start button -->
+    <div class="hero-left">
+      <img src="rak_logo.png"
+           alt="RAK Medical and Health Sciences University logo"
+           class="logo-image">
 
-    <p class="university-name"
-       data-en="Rak Medical And Health Sciences University."
-       data-ar="جامعة رأس الخيمة للعلوم الطبية والصحية">
-      Rak Medical And Health Sciences University.
-    </p>
+      <p class="university-name"
+         data-en="Rak Medical And Health Sciences University."
+         data-ar="جامعة رأس الخيمة للطب والعلوم الصحية.">
+        Rak Medical And Health Sciences University.
+      </p>
 
-    <h1 data-en="Welcome To" data-ar="مرحباً بك في">Welcome To</h1>
-    <h2 data-en="SKIN SURVIVAL GAME" data-ar="لعبة إنقاذ الجلد">SKIN SURVIVAL GAME</h2>
+      <h1 class="welcome-title"
+          data-en="Welcome To"
+          data-ar="مرحباً بكم في">
+        Welcome To
+      </h1>
 
-    <div class="decorative-line" aria-hidden="true">
-      <svg viewBox="0 0 120 20" preserveAspectRatio="none">
-        <path d="M5 10 q10 -6 15 0 t15 0 t15 0 t15 0 t15 0 t15 0" fill="none" stroke="#a3c9d2" stroke-width="2"/>
-      </svg>
-    </div>
+      <h2 data-en="SKIN SURVIVAL GAME"
+          data-ar="لعبة نجاة الجلد">
+        SKIN SURVIVAL GAME
+      </h2>
 
-    <div class="italic-large"
+      <div class="decorative-line">
+        <svg viewBox="0 0 100 20">
+          <path d="M5 10 C 20 0, 40 20, 55 10 S 90 0, 95 10" fill="none"/>
+        </svg>
+      </div>
+
+      <p class="italic-large"
          data-en="Pressure Ulcer Day"
-         data-ar="يوم قرح الفراش">
-      Pressure Ulcer
-    </div>
+         data-ar="يوم قرحة الفراش">
+        Pressure Ulcer Day
+      </p>
 
-    <div class="arabic-text"
+      <p class="english-text"
          data-en="International Pressure Ulcer Prevention Day"
          data-ar="اليوم العالمي للوقاية من قرح الفراش">
-      اليوم العالمي للوقاية من قرح الفراش
-    </div>
+        International Pressure Ulcer Prevention Day
+      </p>
 
-    <div class="decorative-line" aria-hidden="true">
-      <svg viewBox="0 0 120 20" preserveAspectRatio="none">
-        <path d="M5 10 q10 -6 15 0 t15 0 t15 0 t15 0 t15 0 t15 0" fill="none" stroke="#a3c9d2" stroke-width="2"/>
-      </svg>
-    </div>
+      <div class="decorative-line">
+        <svg viewBox="0 0 100 20">
+          <path d="M5 10 C 20 0, 40 20, 55 10 S 90 0, 95 10" fill="none"/>
+        </svg>
+      </div>
 
-<p class="english-text"
-   data-en="Are you ready to select the proper action for each stage?"
-   data-ar="هل أنت مستعد لاختيار الإجراء الصحيح لكل مرحلة؟">
-  Are you ready to select the proper action for each stage?
-</p>
+      <p class="english-text"
+         data-en="Are you ready to select the proper action for each stage?"
+         data-ar="هل أنت مستعد لاختيار الإجراء الصحيح لكل مرحلة؟">
+        Are you ready to select the proper action for each stage?
+      </p>
 
-<!-- Start Game button moved UP -->
-<button id="welcomeStartBtn"
-        aria-label="Start Game"
-        data-en="Start Game"
-        data-ar="ابدأ اللعبة">
-  Start Game
-</button>
+      <button id="welcomeStartBtn"
+              aria-label="Start Game"
+              data-en="Start Game"
+              data-ar="ابدأ اللعبة">
+        Start Game
+      </button>
 
-<!-- Pressure sores image -->
-<div class="welcome-skin-box">
-  <img id="welcomeSkinImage"
-       src="StrokeSmart.jpg"
-       alt="Pressure sore stages"
-  />
-</div>
-
-    <div class="date"
-         aria-label="Date"
+      <p class="date"
          data-en="NOVEMBER 19, 2025"
-         data-ar="19 نوفمبر 2025">
-      NOVEMBER 19, 2025
+         data-ar="١٩ نوفمبر ٢٠٢٥">
+        NOVEMBER 19, 2025
+      </p>
+
+      <!-- Credits: each name on its own line -->
+      <p id="credits-title"
+         data-en="Done by:"
+         data-ar="من إعداد:">
+        Done by:
+      </p>
+
+      <p class="credits-name"
+         data-en="Amna Sulieman Yassin"
+         data-ar="أمنة سليمان ياسين">
+        Amna Sulieman Yassin
+      </p>
+
+      <p class="credits-name"
+         data-en="Khalid Said Islam"
+         data-ar="خالد سيد اسلام">
+        Khalid Said Islam
+      </p>
+
+      <p class="credits-name"
+         data-en="Batool Ismail"
+         data-ar="بتول اسماعيل">
+        Batool Ismail
+      </p>
+
+      <p id="credits-supervisor"
+         data-en="Supervised by: Dr. Basma Maher"
+         data-ar="إشراف: د. بسمة ماهر">
+        Supervised by: Dr. Basma Maher
+      </p>
     </div>
 
-<p id="credits-title"
-   data-en="Done by:"
-   data-ar="من إعداد:">
-   Done by:
-</p>
+    <!-- RIGHT COLUMN: stop sign image -->
+    <div class="hero-right">
+      <img src="stop_pressure_injuries.png"
+           alt="Stop pressure injuries"
+           id="stopSignImage">
+    </div>
+  </div>
 
-<p class="credits-name"
-   data-en="Amna Sulieman Yassin"
-   data-ar="أمنة سليمان ياسين">
-   Amna Sulieman Yassin
-</p>
-
-<p class="credits-name"
-   data-en="Khalid Said Islam"
-   data-ar="خالد سيد اسلام">
-   Khalid Said Islam
-</p>
-
-<p class="credits-name"
-   data-en="Batool Ismail"
-   data-ar="بتول اسماعيل">
-   Batool Ismail
-</p>
-
-<p id="credits-supervisor"
-   data-en="Supervised by: Dr. Basma Maher"
-   data-ar="إشراف: د. بسمة ماهر">
-   Supervised by: Dr. Basma Maher
-</p>
-    
-  </section>
+  <!-- Pressure sores infographic stays below hero -->
+  <div class="welcome-skin-box">
+    <img id="welcomeSkinImage"
+         src="pressure_sore.png"
+         alt="Pressure sore stages">
+  </div>
+</section>
 
     <!-- Game Screen -->
   <section id="gameScreen" aria-label="Game Screen" style="display: none;">
