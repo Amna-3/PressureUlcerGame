@@ -237,16 +237,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nextStageBtn.style.display = 'inline-block';
   }
+  
+nextStageBtn.onclick = () => {
+  stageIndex++;
+  if (stageIndex >= stageOrder.length) {
+    endGame();
+  } else {
+    showInterventions(stageOrder[stageIndex]);
 
-  nextStageBtn.onclick = () => {
-    stageIndex++;
-    if (stageIndex >= stageOrder.length) {
-      endGame();
-    } else {
-      showInterventions(stageOrder[stageIndex]);
-      stageHeader.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+    // Scroll the page gently to the very top instead of to the header
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Or if you prefer absolutely no scrolling, you can just remove this line completely.
+  }
+};
+
 
   function endGame() {
     gameScreen.style.display = 'none';
