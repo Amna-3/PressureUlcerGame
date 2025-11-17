@@ -644,11 +644,11 @@ button#welcomeStartBtn:hover {
 
   .hero-left {
     width: 52%;
-    text-align: center;  /* center everything on the mid-line */
+    text-align: center;
   }
 
   html[dir="rtl"] .hero-left {
-    text-align: center;  /* also center in Arabic */
+    text-align: center;
   }
 
   .hero-right {
@@ -666,6 +666,15 @@ button#welcomeStartBtn:hover {
 
   #welcomeSkinImage {
     max-width: 360px;
+  }
+
+  /* On larger screens like iPad: move STOP sign above names */
+  .hero-right .hero-image-column {
+    order: 1;
+  }
+
+  .hero-right .hero-credits {
+    order: 2;
   }
 }
 
