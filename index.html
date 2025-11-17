@@ -105,13 +105,22 @@
       Start Game
     </button>
   </section>
-
-  <!-- Game Screen -->
+    <!-- Game Screen -->
   <section id="gameScreen" aria-label="Game Screen">
     <div id="interventionSection">
       <p id="stageProgress"></p>
       <h3 id="stageHeader"></h3>
-      <img id="stageImage" src="" alt="Stage Image" />
+
+      <!-- Clickable stage image -->
+      <div class="stage-image-wrapper">
+        <img id="stageImage" src="" alt="Stage Image" />
+        <div class="tap-hint"
+             data-en="Tap image to zoom"
+             data-ar="اضغط على الصورة للتكبير">
+          Tap image to zoom
+        </div>
+      </div>
+
       <div id="interventions"></div>
       <div id="feedback" aria-live="polite"></div>
       <button id="nextStageBtn"
@@ -138,7 +147,15 @@
       Play Again
     </button>
   </section>
-
+  <!-- Image zoom modal -->
+  <div id="imageModal" class="image-modal" aria-hidden="true">
+    <div class="image-modal-content">
+      <button id="imageModalClose" class="image-modal-close" aria-label="Close image">
+        ×
+      </button>
+      <img id="imageModalImg" src="" alt="Zoomed stage image" />
+    </div>
+  </div>
 </div>
 
 <script src="script.js" defer></script>
