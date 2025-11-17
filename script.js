@@ -330,9 +330,20 @@ document.addEventListener('DOMContentLoaded', () => {
     generateCertificate(name);
   });
 
-function generateCertificate(name) {
+  // Detect if entered name is Arabic
+function isArabicName(name) {
+  // returns true if the name contains any Arabic letters
+  return /[\u0600-\u06FF]/.test(name);
+}
+
+  function generateCertificate(name) {
+  const useArabic = isArabicName(name);
+
+  // Choose correct template image
+  const templateSrc = useArabic ? 'certificate_ar.png' : 'certificate_en.png';
+
   const img = new Image();
-  img.src = 'certificate_template.png';   // this is your clean template (no name)
+  img.src = templateSrc;
 
   img.onload = () => {
     const canvas = document.createElement('canvas');
@@ -343,31 +354,43 @@ function generateCertificate(name) {
     // Draw background certificate
     ctx.drawImage(img, 0, 0);
 
-    // ==== DRAW NAME ====
-    // Arabic-friendly font, bold, gold-ish color
-    ctx.font = 'bold 80px "Cairo", "Amiri", "Times New Roman", serif';
-    ctx.fillStyle = '#c89b3d';          // close to the gold in your design
-    ctx.textAlign = 'center';
-    ctx.direction = 'rtl';              // important for Arabic
+    // === Draw the name ===
+    if (useArabic) {
+      // Arabic name + Arabic certificate
+      ctx.font = 'bold 80px "Cairo", "Amiri", "Times New Roman", serif';
+      ctx.fillStyle = '#c89b3d';     // gold-ish like your design
+      ctx.textAlign = 'center';
+      ctx.direction = 'rtl';
 
-    // Position of the name (centered horizontally, a bit above middle)
-    const x = canvas.width / 2;
-    const y = canvas.height * 0.47;     // tweak 0.45–0.50 to move up/down
+      const x = canvas.width / 2;
+      const y = canvas.height * 0.47;   // adjust up/down if needed
+      ctx.fillText(name, x, y);
+    } else {
+      // English name + English certificate
+      ctx.font = 'bold 70px "Times New Roman", "Georgia", serif';
+      ctx.fillStyle = '#c89b3d';
+      ctx.textAlign = 'center';
+      ctx.direction = 'ltr';
 
-    ctx.fillText(name, x, y);
+      const x = canvas.width / 2;
+      const y = canvas.height * 0.47;   // adjust for English template if needed
+      ctx.fillText(name, x, y);
+    }
 
     // Convert to PNG and show download link
     const dataURL = canvas.toDataURL('image/png');
     downloadCertLink.href = dataURL;
-    downloadCertLink.download = `PressureUlcerCertificate-${name}.png`;
+    downloadCertLink.download = useArabic
+      ? `PressureUlcerCertificate-${name}-ar.png`
+      : `PressureUlcerCertificate-${name}-en.png`;
     downloadCertLink.style.display = 'inline-block';
     downloadCertLink.textContent = translations[currentLanguage].certDownload;
   };
 
   img.onerror = () => {
     alert(currentLanguage === 'ar'
-      ? 'تعذّر تحميل قالب الشهادة. تأكدي من وجود الملف certificate_template.png في المشروع.'
-      : 'Could not load certificate template. Please make sure certificate_template.png exists.');
+      ? 'تعذّر تحميل قالب الشهادة. تأكدي من وجود الملفات certificate_ar.png و certificate_en.png في المشروع.'
+      : 'Could not load certificate template. Please make sure certificate_ar.png and certificate_en.png exist.');
   };
 }
 
