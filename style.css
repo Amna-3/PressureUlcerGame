@@ -90,6 +90,21 @@ body {
   width: 100%;
 }
 
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.hero-image-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 360px;
+}
+
 /* Logo perfectly centered above text */
 .logo-image {
   width: 100%;
@@ -202,21 +217,25 @@ html[lang="ar"] .date {
   font-size: 0.95rem;
 }
 
-/* Stop sign image on hero right (we’ll refine its placement later if needed) */
+/* Stop sign image on hero right (sits above infographic) */
 #stopSignImage {
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
   height: auto;
   display: block;
   margin: 0 auto;
 }
 
-/* Welcome image (pressure sores chart) below hero */
+/* Welcome image (pressure sores chart) beneath stop sign */
+.welcome-skin-box {
+  width: 100%;
+}
+
 #welcomeSkinImage {
   width: 100%;
   max-width: 600px;
   height: auto;
-  margin: 14px auto;
+  margin: 0 auto;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
@@ -568,8 +587,8 @@ button#welcomeStartBtn:hover {
   }
 }
 
-/* On wide screens: keep 2-column hero but center text inside left column */
-@media (min-width: 900px) {
+/* On tablets and up: keep 2-column hero but center text inside left column */
+@media (min-width: 768px) {
   #welcomeHero {
     flex-direction: row;
     align-items: flex-start;
@@ -577,7 +596,7 @@ button#welcomeStartBtn:hover {
   }
 
   .hero-left {
-    width: 56%;
+    width: 55%;
     text-align: center;  /* center everything on the mid-line */
   }
 
@@ -586,10 +605,11 @@ button#welcomeStartBtn:hover {
   }
 
   .hero-right {
-    width: 38%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    width: 40%;
+  }
+
+  .hero-image-column {
+    max-width: 100%;
   }
 }
 
