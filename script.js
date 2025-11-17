@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageModalImg = document.getElementById('imageModalImg');
   const imageModalClose = document.getElementById('imageModalClose');
 
+  // Make sure game and end screens are hidden at the start
+  gameScreen.style.display = 'none';
+  endScreen.style.display = 'none';
+
   let currentLanguage = 'en';
 
   const translations = {
@@ -59,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       feedback: {
         correct: '✅ Correct intervention! +10 points',
-        incorrect: '❌ Incorrect intervention. -5 points'
+        incorrect: '❌ Incorrect intervention. 0 points'
       },
       finalScore: 'Your final score: ',
       stageOf: (current, total) => `Stage ${current} of ${total}`
@@ -102,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       feedback: {
         correct: '✅ تدخل صحيح! +10 نقاط',
-        incorrect: '❌ تدخل خاطئ. -5 نقاط'
+        incorrect: '❌ تدخل خاطئ. 0 نقاط'
       },
       finalScore: 'نتيجتك النهائية: ',
       stageOf: (current, total) => `المرحلة ${current} من ${total}`
@@ -118,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
   languageToggle.onclick = () => {
     currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
     updateLanguage();
+
     if (gameScreen.style.display === 'flex' || gameScreen.style.display === 'block') {
       showInterventions(stageOrder[stageIndex]);
     } else if (endScreen.style.display === 'flex' || endScreen.style.display === 'block') {
@@ -149,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
   welcomeStartBtn.onclick = () => {
     welcomeScreen.style.display = 'none';
     endScreen.style.display = 'none';
-    gameScreen.style.display = 'block';
+    gameScreen.style.display = 'flex';   // flex for centered layout
+
     score = 0;
     stageIndex = 0;
     showInterventions(stageOrder[stageIndex]);
@@ -163,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     endScreen.style.display = 'none';
     welcomeScreen.style.display = 'block';
 
-    // Also scroll to top when going back to welcome
+    // Scroll to top when going back to welcome
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -221,11 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (correct) {
       btn.classList.add('correct');
       feedbackEl.textContent = translations[currentLanguage].feedback.correct;
-      score += 10;
+      score += 10;   // +10 for correct
     } else {
       btn.classList.add('wrong');
       feedbackEl.textContent = translations[currentLanguage].feedback.incorrect;
-      score = Math.max(0, score - 5);
+      // No negative score for wrong answer
     }
 
     buttons.forEach(b => {
@@ -237,28 +243,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nextStageBtn.style.display = 'inline-block';
   }
-  
-nextStageBtn.onclick = () => {
-  stageIndex++;
-  if (stageIndex >= stageOrder.length) {
-    endGame();
-  } else {
-    showInterventions(stageOrder[stageIndex]);
 
-    // Scroll the page gently to the very top instead of to the header
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Or if you prefer absolutely no scrolling, you can just remove this line completely.
-  }
-};
+  nextStageBtn.onclick = () => {
+    stageIndex++;
+    if (stageIndex >= stageOrder.length) {
+      endGame();
+    } else {
+      showInterventions(stageOrder[stageIndex]);
 
+      // Scroll the page gently to the very top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   function endGame() {
     gameScreen.style.display = 'none';
-    endScreen.style.display = 'block';
+    endScreen.style.display = 'flex';   // flex for centered layout
+
     finalScoreEl.textContent =
       translations[currentLanguage].finalScore +
       score + ' ' +
       (currentLanguage === 'ar' ? 'نقطة' : 'points');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // IMAGE ZOOM BEHAVIOR
