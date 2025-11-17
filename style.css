@@ -9,6 +9,11 @@
   --text-main: #333;
 }
 
+/* Make whole page same background color */
+html {
+  background-color: var(--page-bg);
+}
+
 /* Arabic mode: use Cairo + no weird spacing */
 html[dir="rtl"] body {
   font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -24,7 +29,6 @@ html[dir="rtl"] [data-ar] {
 /* Base layout */
 body {
   font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  /* use same color as page so there are no side stripes */
   background-color: var(--page-bg);
   margin: 0;
   padding: 0;
@@ -86,11 +90,12 @@ body {
   width: 100%;
 }
 
+/* Logo perfectly centered above text */
 .logo-image {
   width: 100%;
-  max-width: 120px;
+  max-width: 140px;
   height: auto;
-  margin: 40px auto 16px;
+  margin: 32px auto 12px;
   display: block;
   border-radius: 12px;
 }
@@ -136,7 +141,7 @@ html[lang="ar"] .date {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-size: 1.5rem;
-  margin: -8px 0 8px;
+  margin: -4px 0 8px;
 }
 
 .arabic-text {
@@ -150,22 +155,22 @@ html[lang="ar"] .date {
 .english-text {
   font-size: 1rem;
   max-width: 560px;
-  margin: 16px auto 12px; /* slightly closer to the button */
+  margin: 16px auto 12px;
   line-height: 1.5;
 }
 
 .date {
   font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 24px;
+  font-size: 0.95rem;
+  margin: 8px 0 18px;
   font-family: 'Nunito', sans-serif;
 }
 
-/* Decorative lines */
+/* Decorative lines – kept simple & centered */
 .decorative-line {
   display: flex;
   justify-content: center;
-  margin: 6px 0 12px;
+  margin: 4px 0 10px;
 }
 .decorative-line svg {
   stroke: #a3c9d2;
@@ -180,15 +185,24 @@ html[lang="ar"] .date {
   margin: 2px 0;
 }
 
-#credits-title,
-.credits-name,
-#credits-supervisor {
-  margin: 4px 0;
+/* Make student names more prominent */
+#credits-title {
+  margin-top: 6px;
   font-size: 0.95rem;
-  text-align: center;
 }
 
-/* Stop sign image on hero right */
+.credits-name {
+  margin: 2px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#credits-supervisor {
+  margin: 6px 0 4px;
+  font-size: 0.95rem;
+}
+
+/* Stop sign image on hero right (we’ll refine its placement later if needed) */
 #stopSignImage {
   width: 100%;
   max-width: 260px;
@@ -212,6 +226,7 @@ button {
   font-family: inherit;
 }
 
+/* Start Game – always centered along midline */
 button#welcomeStartBtn {
   font-weight: 700;
   font-size: 1rem;
@@ -222,10 +237,10 @@ button#welcomeStartBtn {
   padding: 12px 32px;
   cursor: pointer;
   box-shadow: 0 4px 7px rgba(0,0,0,0.1);
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin: 16px auto 18px;
   width: 100%;
   max-width: 260px;
+  display: block;
 }
 
 button#welcomeStartBtn:hover {
@@ -553,49 +568,29 @@ button#welcomeStartBtn:hover {
   }
 }
 
-/* On wide screens: 2-column hero (logo/text + stop sign) */
+/* On wide screens: keep 2-column hero but center text inside left column */
 @media (min-width: 900px) {
   #welcomeHero {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
 
   .hero-left {
     width: 56%;
-    text-align: left;
+    text-align: center;  /* center everything on the mid-line */
   }
 
   html[dir="rtl"] .hero-left {
-    text-align: right;
+    text-align: center;  /* also center in Arabic */
   }
 
   .hero-right {
     width: 38%;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
-
-  .logo-image {
-    margin-top: 16px;
-    margin-bottom: 10px;
-  }
-
-  .english-text,
-  .arabic-text {
-    max-width: none;
-  }
-
-  #welcomeStartBtn {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
-/* Override position for Start button (centered under text in mobile) */
-#welcomeStartBtn {
-  margin: 20px auto 24px;
-  display: block;
 }
 
 /* Certificate section styling */
