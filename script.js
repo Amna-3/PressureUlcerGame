@@ -336,56 +336,49 @@ function isArabicName(name) {
   return /[\u0600-\u06FF]/.test(name);
 }
 
-  function generateCertificate(name) {
-  const useArabic = isArabicName(name);
+function generateCertificate(name) {
+    const useArabic = isArabicName(name);
+    const templateSrc = useArabic ? 'certificate_ar.png' : 'certificate_en.png';
 
-  // Choose correct template image
-  const templateSrc = useArabic ? 'certificate_ar.png' : 'certificate_en.png';
+    const img = new Image();
+    img.src = templateSrc;
 
-  const img = new Image();
-  img.src = templateSrc;
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
 
-  img.onload = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext('2d');
+        // draw background certificate
+        ctx.drawImage(img, 0, 0);
 
-    // Draw background certificate
-    ctx.drawImage(img, 0, 0);
+        // ==== FONT SETTINGS =====
+        if (useArabic) {
+            ctx.font = "bold 95px 'Amiri', 'Cairo', serif";  
+            ctx.direction = "rtl";
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#C49A3A"; // gold color
+        } else {
+            ctx.font = "bold 85px 'Playfair Display', 'Georgia', serif";
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#C49A3A";
+        }
 
-    // === Draw the name ===
-    if (useArabic) {
-      // Arabic name + Arabic certificate
-      ctx.font = 'bold 80px "Cairo", "Amiri", "Times New Roman", serif';
-      ctx.fillStyle = '#c89b3d';     // gold-ish like your design
-      ctx.textAlign = 'center';
-      ctx.direction = 'rtl';
+        // ==== TEXT POSITION (move down into correct center spot) ====
+        const centerX = canvas.width / 2;
+        const centerY = useArabic ? canvas.height * 0.42 : canvas.height * 0.40;
 
-      const x = canvas.width / 2;
-      const y = canvas.height * 0.47;   // adjust up/down if needed
-      ctx.fillText(name, x, y);
-    } else {
-      // English name + English certificate
-      ctx.font = 'bold 70px "Times New Roman", "Georgia", serif';
-      ctx.fillStyle = '#c89b3d';
-      ctx.textAlign = 'center';
-      ctx.direction = 'ltr';
+        ctx.fillText(name, centerX, centerY);
 
-      const x = canvas.width / 2;
-      const y = canvas.height * 0.47;   // adjust for English template if needed
-      ctx.fillText(name, x, y);
-    }
-
-    // Convert to PNG and show download link
-    const dataURL = canvas.toDataURL('image/png');
-    downloadCertLink.href = dataURL;
-    downloadCertLink.download = useArabic
-      ? `PressureUlcerCertificate-${name}-ar.png`
-      : `PressureUlcerCertificate-${name}-en.png`;
-    downloadCertLink.style.display = 'inline-block';
-    downloadCertLink.textContent = translations[currentLanguage].certDownload;
-  };
+        // create downloadable PNG
+        const link = document.getElementById("downloadCertLink");
+        link.href = canvas.toDataURL("image/png");
+        link.download = useArabic
+            ? `PressureUlcerCertificate-${name}-ar.png`
+            : `PressureUlcerCertificate-${name}-en.png`;
+        link.style.display = "block";
+    };
+}
 
   img.onerror = () => {
     alert(currentLanguage === 'ar'
