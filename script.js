@@ -153,12 +153,18 @@ document.addEventListener('DOMContentLoaded', () => {
     score = 0;
     stageIndex = 0;
     showInterventions(stageOrder[stageIndex]);
+
+    // Scroll to top so the question isn't half hidden
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Restart from end screen
   restartBtn.onclick = () => {
     endScreen.style.display = 'none';
     welcomeScreen.style.display = 'block';
+
+    // Also scroll to top when going back to welcome
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Helper: shuffle an array (for randomizing answers)
